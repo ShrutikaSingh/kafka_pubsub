@@ -1,0 +1,19 @@
+# Ignore virtual environment directories
+venv/
+kafka-env/
+.env/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Ignore Docker containers and build artifacts
+*.pid
+*.log
+
+# Ignore environment variable files
+.env
+
+# Ignore system-specific files
+.DS_Store
