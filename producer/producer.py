@@ -13,8 +13,9 @@ def delivery_report(err, msg):
     else:
         print('Message delivered to {} [{}]'.format(msg.topic(), msg.partition()))
 
-for _ in range(10):
-    producer.produce('test-topic', key='key', value='value', callback=delivery_report)
+while True:
+    producer.produce('test-topic', key='key', value='hello from producer', callback=delivery_report)
     producer.poll(0)
+    time.sleep(1)  # Sleep for 1 second before producing the next message
 
 producer.flush()
