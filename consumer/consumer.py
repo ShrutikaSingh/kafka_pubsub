@@ -1,5 +1,6 @@
 import socket
 import time
+import os
 from confluent_kafka import Consumer, KafkaException, KafkaError
 
 # Wait for Kafka to be ready
@@ -8,7 +9,7 @@ time.sleep(10)
 # Test connectivity to Kafka broker
 def test_kafka_connectivity():
     try:
-        sock = socket.create_connection(("kafka", 9092), timeout=10)
+        sock = socket.create_connection((os.environ.get('KAFKA_BROKER_HOST', 'kafka'), 9092), timeout=10)
         print("Connection to Kafka broker successful")
         sock.close()
     except Exception as e:
@@ -17,7 +18,7 @@ def test_kafka_connectivity():
 test_kafka_connectivity()
 
 conf = {
-    'bootstrap.servers': 'kafka:9092',
+    'bootstrap.servers': os.environ.get('KAFKA_BROKER_HOST', 'kafka') + ':9092',
     'group.id': 'test-group',
     'auto.offset.reset': 'earliest'
 }
