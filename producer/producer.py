@@ -1,10 +1,11 @@
 import time
+import os
 from confluent_kafka import Producer
 
 # Wait for Kafka to be ready
 time.sleep(10)
 
-conf = {'bootstrap.servers': "kafka:9092"}
+conf = {'bootstrap.servers': os.environ.get('KAFKA_BROKER_HOST', 'kafka') + ":9092"}
 producer = Producer(conf)
 
 def delivery_report(err, msg):
